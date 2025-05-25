@@ -89,6 +89,8 @@ button[type="submit"]:hover {
   background: linear-gradient(90deg, #1976d2 0%, #4f8cff 100%);
 }
 
+
+
 @media (max-width: 600px) {
   .reg-form {
     padding: 6% 3%;
@@ -102,4 +104,5 @@ button[type="submit"]:hover {
     min-width: 0;
     width: 100%;
   }
+  
 } 

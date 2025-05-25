@@ -1,6 +1,9 @@
 import React, {useState} from "react";
 import './RegistrationForm.css';
 
+const url = 'https://bszwpoglfggyrpivepex.supabase.co/';
+const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJzendwb2dsZmdneXJwaXZlcGV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwNzc2OTEsImV4cCI6MjA2MzY1MzY5MX0.1THRGtpY2i5mpsJPiQg0iBVJrDRSaz8Y1aO5Zy53sGE';
+
 const initialState = {
     email : '',
     username : '',
@@ -8,7 +11,7 @@ const initialState = {
     firstName : '',
     lastName : '',
     phone : '',
-    password : ''
+    password : '',
 }
 
 const initialErrors = {
@@ -18,7 +21,15 @@ const initialErrors = {
     firstName : '',
     lastName : '',
     phone : '',
-    password : ''
+    password : '',
+    general : ''
+}
+
+function validateEmail(email) {//закомитить
+  const atIndex = email.indexOf('@');//поиск индекса по символу @
+  if (atIndex === -1) return false;//если индекс (по переменной atIndex - найденное по символу) точно равен -1 вернуть false
+  const dotIndex = email.indexOf('.', atIndex);//переменная, вкоторою вложен поиск по символу "." и потом ставиться индекс по символу "@"
+  return dotIndex !== -1 && dotIndex > atIndex + 1;//вернуть -> dotIndex, точно но не равный -1 / в ином случаи dotIndex бальше atIndex (в каком смысле? строго найденный?) а +1 это что значит в данном контексте?
 }
 
 function validatePhone(phone){
@@ -27,7 +38,7 @@ function validatePhone(phone){
         if(phone[i] >= '0' && phone[i] <= '9'){
             digits += phone[i]
         }else{
-            return (false)
+            return (false);
         };
     };
     return digits.length >= 10 && digits.length <= 15;
@@ -36,6 +47,44 @@ function validatePhone(phone){
 function RegistrationForm(){
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState(initialErrors);
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleChange = (e) => {//одинаковая функция для любой формы, вызывается при изменении какого либо поля ввода где е - этот измененный элемент
+        const {name, values} = e.target;
+        setValues({...values, [name] : values});//помещаем в нужную (найденную, которая в квадратных скобках) переменную значение values от пользователя
+        setErrors({...errors, [name] : '', general : ''});
+    };
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        if(!validate()){
+            return;
+        };
+        try{
+            const response = await fetch(`${url}/rest/v1/users`, {
+                method:'POST',
+                headers: {
+                 'apikey': key,
+                 'Authorization': `Bearer ${key}`,
+                 'Content-Type': 'application/json',
+                 'Prefer': 'return=minimum'//какие данные предпочтительны representation - полные данные json, minimum - только строка ответа
+                },
+                body: JSON.stringify({
+                    email : values.email,
+                    username : values.username,
+                    birthdate : values.birthdate,
+                    first_name : values.firstName,
+                    last_name : values.lastName,
+                    phone : values.phone,
+                    password_hash : values.password,
+                })
+            });
+
+        }catch(error){
+            
+        };
+        setSubmitted(true);//отправка данных на сервер
+    }
 
     const validate = () => {
         let valid = true;
@@ -44,27 +93,27 @@ function RegistrationForm(){
             newErrors.phone = 'введен некорректный номер телефона'
             valid = false;
         }/*ниже будут остальные валидации - сделать остальные валидации. вместо функции как validatePhone будет просто проверка на существование*/
-        if(value.email){
+        if(!validateEmail(values.email)){
             newErrors.email = 'введен некорректный e-mail'
             valid = false;
         }
-        if(value.username){
-            newErrors.username = 'некорректное имя пользователя'
+        if(!values.username){
+            newErrors.username = 'некорректный логин'
             valid = false;
         }
-        if(value.birthdate){
+        if(!values.birthdate){
             newErrors.birthdate = 'некорректная дата рождения'
             valid = false;
         }
-        if(value.firstName){
+        if(!values.firstName){
             newErrors.firstName = 'некорректное фамилия пользователя'
             valid = false;
         }
-        if(value.lastName){
+        if(!values.lastName){
             newErrors.lastName = 'некорректное имя'
             valid = false;
         }
-        if(value.password){
+        if(!values.password){
             newErrors.password = 'некорректный пароль'/*может добавить "такой пароль уже существует" и такого же типа на имя фамилию?*/
             valid = false;
         }
@@ -76,11 +125,12 @@ function RegistrationForm(){
         <div className="reg-form-wrapper">
         <form className="reg-form" onSubmit={handleSubmit}>
             <h2>Регистрация</h2>
+            {errors.general &&<div className="error">{errors.general}</div>}
         <div className="reg-form-fields">
             <div className="form-group">
                 <label>Email</label>
-                <input type="email" name="email" value={values.email} onChange={handleChange} />//доступность ввода адреса, 
-                {errors.email && <span className="error">{errors.email}</span>}//при ошибке ввода выводит ошибку?
+                <input type="email" name="email" value={values.email} onChange={handleChange}/> {/*доступность ввода адреса*/}
+                {errors.email && <span className="error">{errors.email}</span>} {/*при ошибке ввода выводит ошибку?*/}
             </div>
             <div className="form-group">
                 <label>Логин</label>
