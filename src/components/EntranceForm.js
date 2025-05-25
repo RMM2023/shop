@@ -72,7 +72,7 @@ function EntaranceForm(){
         <form className="reg-form" onSubmit={handleSubmit}>
             <h2>Вход в личный кабинет</h2>
             {errors.general &&<div className="error">{errors.general}</div>}
-        <div className="reg-form-fields">
+        <div className="reg-form-fields2">
             <div className="form-group">
                 <label>Логин</label>
                 <input type="text" name="username" value={values.username} onChange={handleChange} />
