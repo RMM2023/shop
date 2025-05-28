@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83 63.08">
+  <title>Artboard 4</title>
+  <g id="Icons">
+    <g>
+      <polygon points="73 62 73 15.12 52 1 31 15.58 31 62 73 62" fill="#ffc2c2" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <rect x="43" y="24" width="6" height="7" stroke-width="2" stroke="#333" stroke-linecap="round" stroke-linejoin="round" fill="#e8f7f9"/>
+      <rect x="55" y="24" width="6" height="7" stroke-width="2" stroke="#333" stroke-linecap="round" stroke-linejoin="round" fill="#e8f7f9"/>
+      <rect x="55" y="37" width="6" height="7" stroke-width="2" stroke="#333" stroke-linecap="round" stroke-linejoin="round" fill="#e8f7f9"/>
+      <polyline points="78 18.36 52 1 26 18.93" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <polyline points="45 47 26 34 7 47" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <polygon points="42 62 42 44.88 26 34 10 45.23 10 62 42 62" fill="#fff1b6" stroke="#333" stroke-miterlimit="10" stroke-width="2"/>
+      <rect x="23" y="52" width="6" height="10" stroke-width="2" stroke="#333" stroke-linecap="round" stroke-linejoin="round" fill="#e8f7f9"/>
+      <line y1="62.08" x2="83" y2="62.08" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="2"/>
+    </g>
+  </g>
+</svg>
