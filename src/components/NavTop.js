@@ -1,6 +1,6 @@
 import React from "react";
 import './RegistrationForm.css';
-import '../fontLubrifontWDXLTC/WDXL_Lubrifont_TC';
+import fontFamaly from '../fontLubrifontWDXLTC/WDXL_Lubrifont_TC';
 import iconPath from '../assets/icons/path.png';
 import iconMagnifier from '../assets/icons/magnifier.png';
 
@@ -11,7 +11,7 @@ function NavTop(){
             <h1 className="lableShop">HOUSE <br/> SHOP</h1>
             <div className="menuButton">
                 <img src={iconPath}/>
-                <button type="Menu">Меню</button>
+                <button type="button" className="menu" onclick="showAlert()">Меню</button>
             </div>
             
             <div className="search">Быстрый поиск
