@@ -192,6 +192,47 @@ button[type="submit"]:hover {
   cursor: pointer;
 }
 
+
+.pop-up-menu{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 70%;
+  background-color: rgba(247, 121, 125, 1.00);
+  border-radius: 20px;
+
+}
+
+.pop-up-menu-line{
+  display:flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  margin: 1%;
+}
+
+.top-menu{
+  display: flex;
+  flex-direction: row;
+  width: 10%;
+  height: auto;
+  border-bottom: 2px solid white;
+  border-width: auto;
+}
+
+.top-menu img{
+  width: 40px;
+  height: 40px;
+}
+
+.list-menu{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 @media (max-width: 600px) {
   .reg-form {
     padding: 6% 3%;
