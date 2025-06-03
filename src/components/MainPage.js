@@ -85,30 +85,30 @@ const testProducts = [
 ]
 
 function MainPage(){
-    const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+    const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);//начальное состояние меню - закрыто
     const toggleSideMenu = () =>{
-        setIsSideMenuOpen(!isSideMenuOpen);
+        setIsSideMenuOpen(!isSideMenuOpen);//изменение состояние на противоположное
     };
-    const closeSideMenu = () =>{
+    const closeSideMenu = () =>{//функция закрытия меню
         setIsSideMenuOpen(false);
     };
     useEffect(()=>{
-        const handleKeyDown = (event) =>{
-            if(event.key === 'Escape'){
+        const handleKeyDown = (event) =>{//обработка отслеживания нажатии на кнопки
+            if(event.key === 'Escape'){//указание кнопки
                 closeSideMenu();
             };
         };
-        const handleClickOutside = (event) =>{
-            const sideMenu = document.querySelector('.sidebar');
+        const handleClickOutside = (event) =>{//функция обработки нажатия на кнопку мыши
+            const sideMenu = document.querySelector('.sidebar');//поиск по стилю sidebar
             const menuButton = document.querySelector('.menu-button');
             if(isSideMenuOpen && sideMenu && !sideMenu.contains(event.target) && !menuButton.contains(event.target)){
-                closeSideMenu();
+                closeSideMenu();//если меню открыто и если меню привязано и если не нажали на меню, и если не нажали на кнопку меню
             };
-            if (isSideMenuOpen){
-                document.addEventListener('keydown', handleKeyDown());
+            if (isSideMenuOpen){//закрытие меню при нажатии на кнопку мыши либо escape
+                document.addEventListener('keydown', handleKeyDown());//если меню открыто, привязываем отслеживатели
                 document.addEventListener('mousedown', handleClickOutside());
             };
-            return() => {
+            return() => {//при закрытии меню - отвязываем отслеживатели клика мыши и нажатии на клавиатуру
                 document.removeEventListener('keydown', handleKeyDown());
                 document.removeEventListener('mousedown', handleClickOutside());
             };
