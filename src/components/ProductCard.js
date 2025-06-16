@@ -11,7 +11,7 @@ function ProductCard({ product }){
                         ♡
                     </div>
                     <div className="compare-icon">
-                        ⚖
+                        ⚖️
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@ function ProductCard({ product }){
                     ))}
                 </div>
                 <div className="product-rating">
-                    <span className="rating-stars">⭐</span>
+                    <span className="rating-stars">⭐️</span>
                     <span className="rating-value">{product.rating}</span>
                 </div>
             </div>
@@ -42,4 +42,4 @@ function ProductCard({ product }){
     )
 };
 
-export default ProductCard; 
+export default ProductCard;

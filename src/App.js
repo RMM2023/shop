@@ -1,14 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainPage from './components/MainPage';
+import EntranceForm from './components/EntranceForm';
 import RegistrationForm from './components/RegistrationForm';
-import EntaranceForm from './components/EntranceForm';
-import NavTop from './components/NavTop';
 
 function App() {
   return (
-    <div className="App">
-      <NavTop/>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<EntranceForm />} />
+          <Route path="/register" element={<RegistrationForm />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

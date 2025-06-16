@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import './RegistrationForm.css';
 
 const url = 'https://bszwpoglfggyrpivepex.supabase.co/';
@@ -48,10 +49,11 @@ function RegistrationForm(){
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState(initialErrors);
     const [submitted, setSubmitted] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {//одинаковая функция для любой формы, вызывается при изменении какого либо поля ввода где е - этот измененный элемент
-        const {name, values} = e.target;
-        setValues({...values, [name] : values});//помещаем в нужную (найденную, которая в квадратных скобках) переменную значение values от пользователя
+        const {name, value} = e.target;
+        setValues({...values, [name] : value});//помещаем в нужную (найденную, которая в квадратных скобках) переменную значение value от пользователя
         setErrors({...errors, [name] : '', general : ''});
     };
 
@@ -83,8 +85,12 @@ function RegistrationForm(){
         }catch(error){
             
         };
-        setSubmitted(true);//отправка данных на сервер
+        setSubmitted(true);
+        setTimeout(() => {
+            navigate('/login');
+        }, 1500);
     }
+
 
     const validate = () => {
         let valid = true;
@@ -124,7 +130,10 @@ function RegistrationForm(){
     return(
         <div className="reg-form-wrapper">
         <form className="reg-form" onSubmit={handleSubmit}>
-            <h2>Регистрация</h2>
+            <div className="form-header">
+                <Link to="/" className="back-button">← Назад</Link>
+                <h2>Регистрация</h2>
+            </div>
             {errors.general &&<div className="error">{errors.general}</div>}
         <div className="reg-form-fields">
             <div className="form-group">
@@ -164,7 +173,11 @@ function RegistrationForm(){
             </div>
         </div>
         <button type="submit">Зарегистрироваться</button>
-        {submitted && <div className="success">Регистрация успешна!</div>}
+        {submitted && <div className="success">Регистрация успешна! Перенаправление на страницу входа...</div>}
+        <div className="form-footer">
+
+            <p>Уже есть аккаунт? <Link to="/login">Войти</Link></p>
+        </div>
       </form>
     </div>
     );

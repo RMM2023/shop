@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import './RegistrationForm.css';
 
 const url = 'https://bszwpoglfggyrpivepex.supabase.co/';
@@ -18,6 +19,7 @@ function EntaranceForm(){
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState(initialErrors);
     const [submitted, setSubmitted] = useState(false);
+    const navigate = useNavigate();
     const validate = () => {
     let valid = true;
         let newErrors = {...initialErrors};/*ссылка на initialErrors ... - скопировать как ссылку*/
@@ -34,8 +36,8 @@ function EntaranceForm(){
     };
 
     const handleChange = (e) => {//одинаковая функция для любой формы, вызывается при изменении какого либо поля ввода где е - этот измененный элемент
-        const {name, values} = e.target;
-        setValues({...values, [name] : values});//помещаем в нужную (найденную, которая в квадратных скобках) переменную значение values от пользователя
+        const {name, value} = e.target;
+        setValues({...values, [name] : value});//помещаем в нужную (найденную, которая в квадратных скобках) переменную значение value от пользователя
         setErrors({...errors, [name] : '', general : ''});
     };
 
@@ -55,12 +57,12 @@ function EntaranceForm(){
                 }
             });
             if(!response.ok){
-                setErrors({...errors, [username] : '', [password] : '', general : 'Нет ответа от сервера'});
+                setErrors({...errors, 'username' : '', 'password' : '', general : 'Нет ответа от сервера'});
                 return
             };
             const data = await response.json();
             if(data.length === 0){
-                setErrors({...errors, [username] : '', [password] : '', general : 'Неверный логин или пароль'});
+                setErrors({...errors, 'username' : '', 'password' : '', general : 'Неверный логин или пароль'});
                 return
             };
             const userData = data[0];
@@ -72,6 +74,9 @@ function EntaranceForm(){
                 email : userData.email
             }));
             setSubmitted(true);
+            setTimeout(() => {
+                navigate('/');
+            }, 1500);
         }catch(error){
             
         };
@@ -80,12 +85,16 @@ function EntaranceForm(){
     return(
         <div className="reg-form-wrapper">
         <form className="reg-form" onSubmit={handleSubmit}>
-            <h2>Вход в личный кабинет</h2>
+            <div className="form-header">
+                <Link to="/" className="back-button">← Назад</Link>
+                <h2>Вход в личный кабинет</h2>
+            </div>
             {errors.general &&<div className="error">{errors.general}</div>}
         <div className="reg-form-fields2">
             <div className="form-group">
                 <label>Логин</label>
                 <input type="text" name="username" value={values.username} onChange={handleChange} />
+
                 {errors.username && <span className="error">{errors.username}</span>}
             </div>
             <div className="form-group">
@@ -94,8 +103,11 @@ function EntaranceForm(){
                 {errors.password && <span className="error">{errors.password}</span>}
             </div>
         </div>
-        <button type="submit">Зарегистрироваться</button>
-        {submitted && <div className="success">Регистрация успешна!</div>}
+        <button type="submit">Войти</button>
+        {submitted && <div className="success">Вход выполнен успешно! Перенаправление...</div>}
+        <div className="form-footer">
+            <p>Нет аккаунта? <Link to="/register">Зарегистрироваться</Link></p>
+        </div>
       </form>
     </div>
     );
