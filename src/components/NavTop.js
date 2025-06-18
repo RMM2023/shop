@@ -21,10 +21,10 @@ function NavTop({ onMenuClick, onSearch, searchQuery }){
         
         checkAuth();
         
-        // Слушаем изменения localStorage
+
         window.addEventListener('storage', checkAuth);
         
-        // Альтернативно - проверяем каждые 1000мс (на случай изменений в том же окне)
+
         const interval = setInterval(checkAuth, 1000);
         
         return () => {

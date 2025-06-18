@@ -1,9 +1,8 @@
 export const isAuthenticated = () =>{
-    const token = localStorage.getItem('authToken');//токен-ключ входа на сайт, выдается сервером как подтверждение правильности входа. localStorage аналог sharedPreferences
-    const userData = localStorage.getItem('userData');//дата класс всех остальных данных о пользователе
-    return !!(token && userData);//возвращаем true или false как результат проверки, двойное иотрицание нужно чтобы тоно привести в boolean
-    //альтернативно - return Boolean(token && userData)
-};//вышеописанное - функция-лямбда для внешнего использования
+    const token = localStorage.getItem('authToken');
+    const userData = localStorage.getItem('userData');
+    return !!(token && userData);
+};
 
 export const getUserData = () =>{
     const userData = localStorage.getItem('userData');

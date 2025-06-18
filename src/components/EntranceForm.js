@@ -22,22 +22,22 @@ function EntaranceForm(){
     const navigate = useNavigate();
     const validate = () => {
     let valid = true;
-        let newErrors = {...initialErrors};/*ссылка на initialErrors ... - скопировать как ссылку*/
+        let newErrors = {...initialErrors};
         if(!values.username){
             newErrors.username = 'неверный логин';
             valid = false;
         }
         if(!values.password){
-            newErrors.password = 'неверный пароль'/*может добавить "такой пароль уже существует" и такого же типа на имя фамилию?*/;
+            newErrors.password = 'неверный пароль';
             valid = false;
         }
         setErrors(newErrors);
         return valid;
     };
 
-    const handleChange = (e) => {//одинаковая функция для любой формы, вызывается при изменении какого либо поля ввода где е - этот измененный элемент
+    const handleChange = (e) => {
         const {name, value} = e.target;
-        setValues({...values, [name] : value});//помещаем в нужную (найденную, которая в квадратных скобках) переменную значение value от пользователя
+        setValues({...values, [name] : value});
         setErrors({...errors, [name] : '', general : ''});
     };
 
@@ -53,7 +53,7 @@ function EntaranceForm(){
                     'apikey': key,
                     'Authorization': `Bearer ${key}`,
                     'Content-Type': 'application/json',
-                    'Prefer': 'return=minimum'//какие данные предпочтительны representation - полные данные json, minimum - только строка ответа
+                    'Prefer': 'return=minimum'
                 }
             });
             if(!response.ok){
@@ -66,7 +66,7 @@ function EntaranceForm(){
                 return
             };
             const userData = data[0];
-            const authToken = btoa(`${userData.username}:${userData.id}:${Date.now()}`); // Создаем простой токен, вместо отданного от сервера
+            const authToken = btoa(`${userData.username}:${userData.id}:${Date.now()}`);
             localStorage.setItem('authToken', authToken);
             localStorage.setItem('userData', JSON.stringify({
                 id : userData.id,
@@ -80,7 +80,7 @@ function EntaranceForm(){
         }catch(error){
             
         };
-        setSubmitted(true);//отправка данных на сервер
+        setSubmitted(true);
     }
     return(
         <div className="reg-form-wrapper">

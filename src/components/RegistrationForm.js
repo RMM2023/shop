@@ -26,11 +26,11 @@ const initialErrors = {
     general : ''
 }
 
-function validateEmail(email) {//закомитить
-  const atIndex = email.indexOf('@');//поиск индекса по символу @
-  if (atIndex === -1) return false;//если индекс (по переменной atIndex - найденное по символу) точно равен -1 вернуть false
-  const dotIndex = email.indexOf('.', atIndex);//переменная, вкоторою вложен поиск по символу "." и потом ставиться индекс по символу "@"
-  return dotIndex !== -1 && dotIndex > atIndex + 1;//вернуть -> dotIndex, точно но не равный -1 / в ином случаи dotIndex бальше atIndex (в каком смысле? строго найденный?) а +1 это что значит в данном контексте?
+function validateEmail(email) {
+  const atIndex = email.indexOf('@');
+  if (atIndex === -1) return false;
+  const dotIndex = email.indexOf('.', atIndex);
+  return dotIndex !== -1 && dotIndex > atIndex + 1;
 }
 
 function validatePhone(phone){
@@ -51,9 +51,9 @@ function RegistrationForm(){
     const [submitted, setSubmitted] = useState(false);
     const navigate = useNavigate();
 
-    const handleChange = (e) => {//одинаковая функция для любой формы, вызывается при изменении какого либо поля ввода где е - этот измененный элемент
+    const handleChange = (e) => {
         const {name, value} = e.target;
-        setValues({...values, [name] : value});//помещаем в нужную (найденную, которая в квадратных скобках) переменную значение value от пользователя
+        setValues({...values, [name] : value});
         setErrors({...errors, [name] : '', general : ''});
     };
 
@@ -69,7 +69,7 @@ function RegistrationForm(){
                  'apikey': key,
                  'Authorization': `Bearer ${key}`,
                  'Content-Type': 'application/json',
-                 'Prefer': 'return=minimum'//какие данные предпочтительны representation - полные данные json, minimum - только строка ответа
+                 'Prefer': 'return=minimum'
                 },
                 body: JSON.stringify({
                     email : values.email,
@@ -94,11 +94,11 @@ function RegistrationForm(){
 
     const validate = () => {
         let valid = true;
-        let newErrors = {...initialErrors};/*ссылка на initialErrors ... - скопировать как ссылку*/
+        let newErrors = {...initialErrors};
         if(!validatePhone(values.phone)){
             newErrors.phone = 'введен некорректный номер телефона'
             valid = false;
-        }/*ниже будут остальные валидации - сделать остальные валидации. вместо функции как validatePhone будет просто проверка на существование*/
+        }
         if(!validateEmail(values.email)){
             newErrors.email = 'введен некорректный e-mail'
             valid = false;
@@ -120,7 +120,7 @@ function RegistrationForm(){
             valid = false;
         }
         if(!values.password){
-            newErrors.password = 'некорректный пароль'/*может добавить "такой пароль уже существует" и такого же типа на имя фамилию?*/
+            newErrors.password = 'некорректный пароль'
             valid = false;
         }
         setErrors(newErrors)
@@ -138,8 +138,8 @@ function RegistrationForm(){
         <div className="reg-form-fields">
             <div className="form-group">
                 <label>Email</label>
-                <input type="email" name="email" value={values.email} onChange={handleChange}/> {/*доступность ввода адреса*/}
-                {errors.email && <span className="error">{errors.email}</span>} {/*при ошибке ввода выводит ошибку?*/}
+                <input type="email" name="email" value={values.email} onChange={handleChange}/> 
+                {errors.email && <span className="error">{errors.email}</span>}
             </div>
             <div className="form-group">
                 <label>Логин</label>

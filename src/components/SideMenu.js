@@ -7,7 +7,6 @@ import iconElectronics from '../assets/icons/electronics.png';
 
 function SideMenu({ categories, selectedCategory, onCategoryChange }){
     
-    // Статические категории с иконками (для отображения в верхней части)
     const staticCategories = [
         { id: 'home', name: 'ДОМ', icon: iconHome },
         { id: 'clothes', name: 'ОДЕЖДА', icon: iconClipart },
@@ -15,12 +14,10 @@ function SideMenu({ categories, selectedCategory, onCategoryChange }){
         { id: 'electronics', name: 'ЭЛЕКТРОНИКА', icon: iconElectronics }
     ];
 
-    // Обработчик выбора категории
     const handleCategoryClick = (categoryId) => {
         onCategoryChange(categoryId === selectedCategory ? null : categoryId);
     };
 
-    // Обработчик показа всех товаров
     const handleShowAll = () => {
         onCategoryChange(null);
     };
@@ -29,7 +26,6 @@ function SideMenu({ categories, selectedCategory, onCategoryChange }){
         <div className="pop-up-menu">
             <div className="pop-up-menu-line">
                 {staticCategories.map(category => {
-                    // Находим соответствующую категорию из базы данных по имени
                     const dbCategory = categories.find(cat => 
                         cat.name.toLowerCase().includes(category.name.toLowerCase()) ||
                         category.name.toLowerCase().includes(cat.name.toLowerCase())

@@ -15,7 +15,7 @@ function MainPage(){
     const [error, setError] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
 
-    // Загрузка категорий
+
     const loadCategories = async () => {
         try {
             const data = await fetchCategories();
@@ -25,7 +25,7 @@ function MainPage(){
         }
     };
 
-    // Загрузка товаров
+
     const loadProducts = async (categoryId = null) => {
         try {
             setLoading(true);
@@ -39,7 +39,6 @@ function MainPage(){
         }
     };
 
-    // Фильтрация товаров по поисковому запросу
     const filterProducts = (query, categoryId = null) => {
         let filteredProducts = categoryId 
             ? allProducts.filter(product => product.category_id === categoryId)
@@ -56,13 +55,13 @@ function MainPage(){
         setProducts(filteredProducts);
     };
 
-    // Обработчик поиска
+
     const handleSearch = (query) => {
         setSearchQuery(query);
         filterProducts(query, selectedCategory);
     };
 
-    // Обработчик изменения категории
+
     const handleCategoryChange = (categoryId) => {
         setSelectedCategory(categoryId);
         if (categoryId) {
@@ -70,29 +69,28 @@ function MainPage(){
         } else {
             loadProducts();
         }
-        // Применяем поисковый запрос к новой категории
+
         setTimeout(() => {
             filterProducts(searchQuery, categoryId);
         }, 100);
     };
 
-    // Загрузка данных при монтировании компонента
+ 
     useEffect(() => {
         loadCategories();
         loadProducts();
     }, []);
 
-    // Обработчик открытия/закрытия меню
+
     const toggleSideMenu = () => {
         setIsSideMenuOpen(!isSideMenuOpen);
     };
 
-    // Обработчик закрытия меню
+
     const closeSideMenu = () => {
         setIsSideMenuOpen(false);
     };
 
-    // Обработчик ESC и клика вне панели
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'Escape') {
@@ -148,7 +146,6 @@ function MainPage(){
                             </div>
                         </div>
                         <div className="banner-image">
-                            {/* Здесь будет изображение стола и стульев */}
                         </div>
                     </div>
                     

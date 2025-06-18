@@ -434,7 +434,6 @@ button[type="submit"]:active {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Стили для главной страницы */
 .main-page {
   min-height: 100vh;
   background-color: #f8f9fa;
@@ -456,7 +455,6 @@ button[type="submit"]:active {
   width: 100%;
 }
 
-/* Стили для промо-баннера */
 .promo-banner {
   background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
   border-radius: 1rem;
@@ -524,7 +522,6 @@ button[type="submit"]:active {
   border-radius: 0.5rem;
 }
 
-/* Стили для сетки товаров */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
@@ -532,7 +529,6 @@ button[type="submit"]:active {
   padding: 1.5vh 0;
 }
 
-/* Стили для карточек товаров */
 .product-card {
   background: white;
   border-radius: 0.8rem;
@@ -663,7 +659,6 @@ button[type="submit"]:active {
   font-size: 0.85rem;
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   .nav-top-container{
     flex-direction: column;
@@ -736,8 +731,7 @@ button[type="submit"]:active {
   .sidebar-open {
     left: 0;
   }
-  
-  /* На мобильных делаем категории вертикально */
+
   .pop-up-menu-line{
     flex-direction: column;
     gap: 1%;
@@ -788,7 +782,6 @@ button[type="submit"]:active {
   }
 }
 
-/* Стили для активных элементов меню */
 .top-menu.active {
   background-color: rgba(247, 121, 125, 1.00);
   border: 2px solid rgba(247, 121, 125, 1.00);
@@ -815,7 +808,6 @@ button[type="submit"]:active {
   border-radius: 0.3rem;
 }
 
-/* Стили для состояний загрузки и ошибок */
 .loading {
   display: flex;
   justify-content: center;

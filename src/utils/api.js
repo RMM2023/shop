@@ -62,7 +62,6 @@ export const fetchProducts = async (categoryId = null) => {
     }
 };
 
-// Загрузка товара по ID
 export const fetchProductById = async (productId) => {
     try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${productId}&select=*,categories(name)`, {
@@ -83,7 +82,6 @@ export const fetchProductById = async (productId) => {
     }
 };
 
-// Поиск товаров по названию
 export const searchProducts = async (searchTerm) => {
     try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/products?name=ilike.%${searchTerm}%&select=*,categories(name)`, {
